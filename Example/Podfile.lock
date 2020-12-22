@@ -1,0 +1,16 @@
+PODS:
+  - AsayerTracker (0.1.0)
+
+DEPENDENCIES:
+  - AsayerTracker (from `../`)
+
+EXTERNAL SOURCES:
+  AsayerTracker:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AsayerTracker: 05675ccb4bb0082514b1bb2c81d35b405e793ed7
+
+PODFILE CHECKSUM: 68f9e00a39762848092f1228f01dc178238e233e
+
+COCOAPODS: 1.10.0

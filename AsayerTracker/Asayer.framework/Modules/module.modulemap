@@ -1,0 +1,4 @@
+framework module Asayer {
+  header "Asayer-Swift.h"
+  requires objc
+}

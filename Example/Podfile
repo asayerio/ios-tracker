@@ -1,0 +1,6 @@
+use_frameworks!
+target 'AsayerTracker_Tests' do
+  pod 'AsayerTracker', :path => '../'
+  
+  
+end
