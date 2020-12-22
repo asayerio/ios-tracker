@@ -30,7 +30,7 @@ See everything your users do and how your entire stack behaves for every issue. 
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'AsayerTracker/Classes/**/*'
+  # s.source_files = 'AsayerTracker/Classes/**/*'
   
   # s.resource_bundles = {
   #   'AsayerTracker' => ['AsayerTracker/Assets/*.png']
