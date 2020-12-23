@@ -23,8 +23,8 @@ See everything your users do and how your entire stack behaves for every issue. 
 
   s.homepage         = 'https://github.com/asayerio/ios-tracker'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'AsayerIO' => 'sales@asayer.io' }
+  s.license          = { :type => 'Proprietary', :file => 'LICENSE' }
+  s.author           = { 'AsayerIO' => 'support@asayer.io' }
   s.source           = { :git => 'https://github.com/asayerio/ios-tracker.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
