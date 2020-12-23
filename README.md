@@ -37,7 +37,7 @@ import Asayer
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-    Asayer.shared.start(projectID: "PROJECT_ID", config: nil)
+    Asayer.shared.start(projectID: "PROJECT_ID", options: .defaults)
 
     //...
 
@@ -45,6 +45,33 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
+You can either pass .defaults to options parameter in order to start defaults modules or specify a custom configuration :
+
+```swift
+let options = AsayerOptions(inspector: true,
+                            crashs: true,
+                            analytics: true,
+                            performances: true,
+                            logs: true,
+                            inspectorOptions: .defaults)
+Asayer.shared.start(projectID: "5268476514251333", options: options)
+```
+### Options
+The components that you can start are:
+
+- **inspector**: Record screen changes in order to replay it later from yout Dashboard
+- **crashs**: Record the uncaught exceptions that occured in your application.
+- **analytics**: Record screen changes, user gestures, and text input.
+- **performances**: Record app performances and the impact on the device.
+- **logs**: Record the logs in order to facilitate the debugging.
+
+If you enabled the inspector module, you may want to customize "inspectorOptions" parameter to choose what to record on the screen:
+
+- **recordNumbers**: Record numeric values in input fields
+- **recordEmails**: Record email adresses
+- **recordImages**: Upload missing images/icons in order to make a better replay
+
+## Methods
 ### userID
 Associates the userID to the recorded session. The method should be called with one string argument.
 
@@ -71,6 +98,16 @@ Sends custom event to the session recorder. These events are searchable by the f
 
 ```swift
 Asayer.shared.metadata(name: "eventName", payload: selectedPlan)
+```
+
+### Exclude views in the inspector
+When the inspector is recording the screen content, you may want to exclude a view and it's subviews.
+Setting a view as obscure makes the content of the text fields masked.
+Setting a view as hidden makes it completely disappear from the replay.
+
+```swift
+Inspector.shared.setViewObscure(someView, obscure: true)
+Inspector.shared.setViewHidden(someOtherView, hidden: true)
 ```
 
 ## Author

@@ -1085,7 +1085,7 @@ You can find all the details on <a href="https://asayer.io/">asayer.io</a>.</p>
 
 <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span><span class="kc">_</span> <span class="n">application</span><span class="p">:</span> <span class="bp">UIApplication</span><span class="p">,</span> <span class="n">didFinishLaunchingWithOptions</span> <span class="n">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="bp">UIApplication</span><span class="p">.</span><span class="n">LaunchOptionsKey</span><span class="p">:</span> <span class="nb">Any</span><span class="p">]?)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span> <span class="p">{</span>
 
-    <span class="n">Asayer</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">projectID</span><span class="p">:</span> <span class="s">&quot;PROJECT_ID&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="n">Asayer</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">projectID</span><span class="p">:</span> <span class="s">&quot;PROJECT_ID&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="p">.</span><span class="n">defaults</span><span class="p">)</span>
 
     <span class="c1">//...</span>
 
@@ -1093,6 +1093,32 @@ You can find all the details on <a href="https://asayer.io/">asayer.io</a>.</p>
 <span class="p">}</span>
 </pre></div>
 
+<p>You can either pass .defaults to options parameter in order to start defaults modules or specify a custom configuration :</p>
+<div class="codehilite"><pre><span class="kd">let</span> <span class="nv">options</span> <span class="p">=</span> <span class="n">AsayerOptions</span><span class="p">(</span><span class="n">inspector</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                            <span class="n">crashs</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                            <span class="n">analytics</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                            <span class="n">performances</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                            <span class="n">logs</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                            <span class="n">inspectorOptions</span><span class="p">:</span> <span class="p">.</span><span class="n">defaults</span><span class="p">)</span>
+<span class="n">Asayer</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="n">projectID</span><span class="p">:</span> <span class="s">&quot;5268476514251333&quot;</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">options</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="options">Options<a class="headerlink" href="#options" title="Permanent link"></a></h3>
+<p>The components that you can start are:</p>
+<ul>
+<li><strong>inspector</strong>: Record screen changes in order to replay it later from yout Dashboard</li>
+<li><strong>crashs</strong>: Record the uncaught exceptions that occured in your application.</li>
+<li><strong>analytics</strong>: Record screen changes, user gestures, and text input.</li>
+<li><strong>performances</strong>: Record app performances and the impact on the device.</li>
+<li><strong>logs</strong>: Record the logs in order to facilitate the debugging.</li>
+</ul>
+<p>If you enabled the inspector module, you may want to customize &ldquo;inspectorOptions&rdquo; parameter to choose what to record on the screen:</p>
+<ul>
+<li><strong>recordNumbers</strong>: Record numeric values in input fields</li>
+<li><strong>recordEmails</strong>: Record email adresses</li>
+<li><strong>recordImages</strong>: Upload missing images/icons in order to make a better replay</li>
+</ul>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link"></a></h2>
 <h3 id="userid">userID<a class="headerlink" href="#userid" title="Permanent link"></a></h3>
 <p>Associates the userID to the recorded session. The method should be called with one string argument.</p>
 <div class="codehilite"><pre><span class="n">Asayer</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">userID</span><span class="p">(</span><span class="err">&#39;</span><span class="n">user</span><span class="p">@</span><span class="n">asayer</span><span class="p">.</span><span class="n">io</span><span class="err">&#39;</span><span class="p">);</span>
@@ -1113,7 +1139,15 @@ You can find all the details on <a href="https://asayer.io/">asayer.io</a>.</p>
 <div class="codehilite"><pre><span class="n">Asayer</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;eventName&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">selectedPlan</span><span class="p">)</span>
 </pre></div>
 
+<h3 id="exclude-views-in-the-inspector">Exclude views in the inspector<a class="headerlink" href="#exclude-views-in-the-inspector" title="Permanent link"></a></h3>
+<p>When the inspector is recording the screen content, you may want to exclude a view and it&rsquo;s subviews.
+Setting a view as obscure makes the content of the text fields masked.
+Setting a view as hidden makes it completely disappear from the replay.</p>
+<div class="codehilite"><pre><span class="n">Inspector</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">setViewObscure</span><span class="p">(</span><span class="n">someView</span><span class="p">,</span> <span class="n">obscure</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="n">Inspector</span><span class="p">.</span><span class="n">shared</span><span class="p">.</span><span class="n">setViewHidden</span><span class="p">(</span><span class="n">someOtherView</span><span class="p">,</span> <span class="n">hidden</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</pre></div>
+
 <h2 id="author">Author<a class="headerlink" href="#author" title="Permanent link"></a></h2>
-<p>AsayerIO</p>
+<p><a href="https://asayer.io/">Asayer.io</a></p>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link"></a></h2>
 <p>AsayerTracker is available under the MIT license. See the LICENSE file for more info.</p></article></body></html>
