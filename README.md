@@ -54,7 +54,7 @@ let options = AsayerOptions(inspector: true,
                             performances: true,
                             logs: true,
                             inspectorOptions: .defaults)
-Asayer.shared.start(projectID: "5268476514251333", options: options)
+Asayer.shared.start(projectID: "PROJECT_ID", options: options)
 ```
 ### Options
 The components that you can start are:
